@@ -1,6 +1,6 @@
 # modelo.py
 from datetime import datetime
-from config import db, ma
+from modelo import db, ma
 from flask_sqlalchemy import SQLAlchemy
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from marshmallow import fields
