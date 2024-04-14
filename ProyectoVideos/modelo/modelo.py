@@ -1,7 +1,11 @@
 # modelo.py
 from datetime import datetime
 from config import db, ma
+from flask_sqlalchemy import SQLAlchemy
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from marshmallow import fields
 
+db= SQLAlchemy()
 
 class Usuario(db.Model):
 
@@ -22,5 +26,25 @@ class UsuarioSchema(ma.SQLAlchemyAutoSchema):
 
 usuario_schema = UsuarioSchema()
 people_schema = UsuarioSchema(many=True)
+
+class Tarea(db.Model):
+    __tablename__ = "tarea"
+
+    id = db.Column(db.Integer, primary_key=True)
+    file=db.Column(db.Blob)
+    fecha = db.Column(db.String(32))
+    status= db.Column(db.String(32))
+
+class TareaSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Tarea
+        load_instance = True
+        sqla_session = db.session
+
+tarea_schema = TareaSchema()
+tarea_schema = TareaSchema(many=True)
+    
+
+    
 
 
