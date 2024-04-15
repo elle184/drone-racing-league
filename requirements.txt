@@ -1,0 +1,15 @@
+pika
+python-dotenv
+Flask-Cors
+Flask-JWT
+Flask-JWT-Extended
+Flask-RESTful
+Flask-SQLAlchemy
+SQLAlchemy
+psycopg2-binary
+Flask-Migrate
+Flask-CORS
+Werkzeug
+jinja2
+PyJWT
+flask

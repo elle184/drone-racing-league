@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'idrl-rabbit'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    depends_on:
+      - postgresql
+    environment:
+      - "RABBITMQ_DEFAULT_USER=admin"
+      - "RABBITMQ_DEFAULT_PASS=admin"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - idrl-net
+
+  api:
+    container_name: 'idrl-api'
+    build:
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - postgresql
+      - rabbitmq
+    environment:
+          - SSL_CONNECTION=0
+          - URI=amqp://admin:admin@rabbitmq:5672
+          - CIPHER_KEY=ECDHE+AESGCM:!ECDSA
+          - PREFETCH_COUNT=1
+          - PRODUCER_QUEUE=videoPublishQueue
+          - EXCHANGE_QUEUE=videoExchange
+          - ROUTING_KEY=videoKey
+          - MAX_CONSUMER_RETRIES=5
+          - RETRY_DELEY_CONSUMER=5
+          - MAX_CONNECTION_RETRIES=7
+          - RETRY_DELAY_CONNECTION=5
+          - MAX_PUBLISH_RETRIES=5
+          - RETRY_DELAY_PUBLISH=3
+          - POSTGRESQL_DB=idrl
+          - POSTGRESQL_USER=postgres
+          - POSTGRESQL_PASSWORD=postgres
+          - POSTGRESQL_HOST=postgresql
+          - POSTGRESQL_PORT=5432
+    volumes:
+      - .:/app
+    ports:
+      - "5050:5050"
+    networks:
+      - idrl-net
+
+
+  postgresql:
+    image: postgres:latest
+    container_name: 'idrl-db'
+    restart: always
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=postgres"
+      - "POSTGRES_DB=idrl"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - idrl-net
+
+networks:
+  idrl-net:
+    driver: bridge
+
+volumes:
+  pgdata:
