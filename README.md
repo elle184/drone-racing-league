@@ -17,9 +17,9 @@ Es importante destacar que el proyecto se enfoca en el desarrollo del backend y 
 ## Integrantes del Equipo de Desarrollo
 
 1. Yojan Stiben Hungría
-2.
-3. 
-4. 
+2. María Scoth Manco
+3. Juan David Ardila
+4. Adrián Francisco Becerra
 
 
 # Guía de Instalación y Configuración
