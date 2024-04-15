@@ -53,4 +53,11 @@ docker system prune -a --volumes
         "video_id": 1
     }
 ```
+
 ## Recursos Adicionales
+
+https://github.com/elle184/drone-racing-league/assets/123900108/33afe273-878c-45a7-9879-6d52781ce92f
+
+
+
+
