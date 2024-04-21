@@ -68,9 +68,21 @@ services:
     networks:
       - idrl-net
 
+  gateway:
+    image: nginx:latest
+    ports:
+       - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - idrl-net  
+    depends_on:
+      - api       
+
 networks:
   idrl-net:
     driver: bridge
 
 volumes:
   pgdata:
+
