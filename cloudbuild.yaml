@@ -1,0 +1,10 @@
+
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/soluciones-cloud-2024/idrl-api', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/soluciones-cloud-2024/idrl-api']
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   args: ['run', 'deploy', 'idrl-api', '--image', 'gcr.io/soluciones-cloud-2024/idrl-api', '--platform', 'managed', '--region', 'us-central1']
+# - name: 'gcr.io/cloud-builders/gcloud'
+#   args: ['run', 'services', 'update', 'idrl-api', '--platform', 'managed', '--region', 'us-central1', '--set-env-vars', 'GOOGLE_CLOUD_PROJECT=soluciones-cloud-2024']
