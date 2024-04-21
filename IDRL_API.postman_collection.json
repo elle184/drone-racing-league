@@ -35,7 +35,7 @@
 			},
 			"response": [
 				{
-					"name": "Crear Usuario Exitosamente",
+					"name": "Create User Successfully",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -146,7 +146,7 @@
 			},
 			"response": [
 				{
-					"name": "Iniciar Sesión Éxitosamente",
+					"name": "Login Successfully",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -238,7 +238,7 @@
 			},
 			"response": [
 				{
-					"name": "Crear Tarea de Edición Exitosamente",
+					"name": "Create Edit Task Successfully",
 					"originalRequest": {
 						"method": "POST",
 						"header": [
@@ -330,7 +330,7 @@
 			},
 			"response": [
 				{
-					"name": "Obtener Videos Exitosamente",
+					"name": "Successfully Get Videos",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -398,7 +398,7 @@
 			},
 			"response": [
 				{
-					"name": "Obtener Videos Mejor Valorados Existosamente",
+					"name": "Get Top Rated Videos Successfully",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -466,7 +466,7 @@
 			},
 			"response": [
 				{
-					"name": "Obtener Videos Mejor Valorados Existosamente",
+					"name": "Get  Aall Top Rated Videos Successfully",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -515,7 +515,7 @@
 					"body": "[\n    {\n        \"id\": 6,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/20240411221445-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 5,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411221349-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 4,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411220408-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 3,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411220129-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 2,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411215345-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 1,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411215140-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    }\n]"
 				},
 				{
-					"name": "Obtener Videos Mejor Valorados Exitosamente",
+					"name": "Get All Videos Successfully",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -600,7 +600,7 @@
 			},
 			"response": [
 				{
-					"name": "Votar Video Exitosamente",
+					"name": "Vote Video Successfully",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
@@ -686,7 +686,7 @@
 			},
 			"response": [
 				{
-					"name": "Obtener Información de una Tarea Success",
+					"name": "Obtain Information from a Success Task",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -765,7 +765,7 @@
 			},
 			"response": [
 				{
-					"name": "Eliminar Tarea Exitosamente",
+					"name": "Delete Task Successfully",
 					"originalRequest": {
 						"method": "DELETE",
 						"header": [],

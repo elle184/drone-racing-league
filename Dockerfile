@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Otorgar permisos de lectura y escritura a todos los archivos y directorios
+# Otorgar permisos de lectura y escritura a todos los archivos y directorios dentro de /app para que cuando se construyan los videos se puedan guardar
 RUN chmod -R 777 /app
 
 # Iniciar la aplicación

@@ -683,10 +683,10 @@ class RabbitPublisher:
 
 
 if __name__ == '__main__':
-    # crea la cola
+    # crea la cola que permite la comunicación entre el productor y el consumidor
     create_queue_producer()
 
-    # Crear un hilo para el consumidor
+    # Crear un hilo para el consumidor que escucha los mensajes de RabbitMQ y los procesa
     consumer_thread = threading.Thread(target=run_consumer)
     consumer_thread.start()
 
