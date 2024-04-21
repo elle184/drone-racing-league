@@ -17,9 +17,9 @@ Es importante destacar que el proyecto se enfoca en el desarrollo del backend y 
 ## Integrantes del Equipo de Desarrollo
 
 1. Yojan Stiben Hungría
-2.
-3. 
-4. 
+2. María Scoth Manco
+3. Juan David Ardila
+4. Adrián Francisco Becerra
 
 
 # Guía de Instalación y Configuración
@@ -53,4 +53,7 @@ docker system prune -a --volumes
         "video_id": 1
     }
 ```
+
 ## Recursos Adicionales
+
+https://github.com/elle184/drone-racing-league/assets/123900108/33afe273-878c-45a7-9879-6d52781ce92f
