@@ -303,7 +303,7 @@ def upload_video(current_user):
         now = datetime.datetime.now()
         user_id = current_user.id
         video_name = f'{now.strftime("%Y%m%d%H%M%S")}-{user_id}-{video_file.filename}'
-        video_file.save('videos_cargados/' + secure_filename(f'{now.strftime("%Y%m%d%H%M%S")}-{user_id}-{video_file.filename}'))
+        video_file.save('shared/videos_uploaded/' + secure_filename(f'{now.strftime("%Y%m%d%H%M%S")}-{user_id}-{video_file.filename}'))
     else:
         return jsonify({"error": "formato de archivo no permitido"}), 400
 
@@ -334,7 +334,7 @@ def upload_video(current_user):
     publisher.publish_message(
         {
             "file_name": video_file.filename,
-            "file_path": 'videos_cargados/' + video_name,
+            "file_path": 'shared/videos_uploaded/' + video_name,
             "user_id": current_user.id,
             "task_id": task.id,
             "video_id": video.id
@@ -389,7 +389,7 @@ def delete_task(current_user, task_id):
 
 @app.route('/videos/<string:video_path>', methods=['GET'])
 def send_video_uploaded(video_path):
-    return send_file(f'videos_convertidos/procesado_{video_path}')
+    return send_file(f'shared/video_converted/procesado_{video_path}')
 
 
 @app.route('/api/videos', methods=['GET'])
@@ -587,9 +587,9 @@ class RabbitConsumer:
                 
                 logger.info("Procesando el video")
  
-                output_dir = "videos_convertidos"
+                output_dir = "videos_converted"
 
-                file = 'videos_cargados/'+video.path
+                file = 'shared/videos_converted/'+video.path
                 filename = video.path
                 # Nombre del archivo de salida
                 output_filename = f"{output_dir}/procesado_{filename}"
