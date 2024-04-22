@@ -1,19 +1,17 @@
 version: '3'
 services:
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:3-management-alpine
 
   api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: 'idrl-api'
-    restart: always
-    env_file:
-      - .env
-    volumes:
-      - .:/app
-    ports:
-      - "80:5050"
-    depends_on:
-      - rabbitmq
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: 'idrl-api'
+      restart: always
+      env_file:
+        - .env
+      volumes:
+        - .:/app
+      ports:
+        - "80:5050"
