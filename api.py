@@ -39,6 +39,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app_context = app.app_context()
 app_context.push()
+app.config['SQLALCHEMY_POOL_SIZE'] = 30
+app.config['SQLALCHEMY_MAX_OVERFLOW'] = 30
+app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 10
 db = SQLAlchemy(app)
 # Setting CORS
 CORS(
@@ -48,7 +52,7 @@ CORS(
 )
 
 # Setting JWT
-app.config['JWT_SECRET_KEY'] = "secret_key"
+app.config['JWT_SECRET_KEY'] = "super-secret"
 
 
 '''
@@ -187,7 +191,7 @@ Health check section
 
 @app.route('/', methods=['GET'])
 def index():
-    return 'API of Drone Racing League is running'
+    return 'IDRL service is up and running!'
 
 
 @app.route('/ping', methods=['GET'])
@@ -244,7 +248,7 @@ def login():
                 "iat": datetime.datetime.utcnow(),
                 "nbf": datetime.datetime.utcnow()
             },
-            "secret_key",
+            "super-secret",
             algorithm="HS256"
         )
 
@@ -301,9 +305,10 @@ def upload_video(current_user):
 
     if video_file and allowed_file(video_file.filename):
         now = datetime.datetime.now()
+        name_time = now.strftime('%Y%m%d%H%M%S%f')
         user_id = current_user.id
-        video_name = f'{now.strftime("%Y%m%d%H%M%S")}-{user_id}-{video_file.filename}'
-        video_file.save('shared/videos_uploaded/' + secure_filename(f'{now.strftime("%Y%m%d%H%M%S")}-{user_id}-{video_file.filename}'))
+        video_name = f'{name_time}-{user_id}-{video_file.filename}'
+        video_file.save('shared/videos-uploaded/' + secure_filename(f'{name_time}-{user_id}-{video_file.filename}'))
     else:
         return jsonify({"error": "formato de archivo no permitido"}), 400
 
@@ -334,7 +339,7 @@ def upload_video(current_user):
     publisher.publish_message(
         {
             "file_name": video_file.filename,
-            "file_path": 'shared/videos_uploaded/' + video_name,
+            "file_path": 'shared/videos-uploaded/' + video_name,
             "user_id": current_user.id,
             "task_id": task.id,
             "video_id": video.id
@@ -369,7 +374,7 @@ def get_task(current_user, task_id):
     if video is None:
         return jsonify({"message": "video no encontrado"}), 404
 
-    url = f'http://localhost:5050/videos/{video.path}'
+    url = f'http://35.233.224.157/videos/{video.path}'
 
     return jsonify({"id": task.id, "name": task.name, "video_id": task.video_id, "status": task.status, "url": url})
 
@@ -389,19 +394,19 @@ def delete_task(current_user, task_id):
 
 @app.route('/videos/<string:video_path>', methods=['GET'])
 def send_video_uploaded(video_path):
-    return send_file(f'shared/video_converted/procesado_{video_path}')
+    return send_file(f'shared/videos-converted/procesado_{video_path}')
 
 
 @app.route('/api/videos', methods=['GET'])
 def get_videos():
     videos = Video.query.all()
-    return jsonify([{"id": video.id, "name": video.name, "image": video.image, "path": f'http://localhost:5050/videos/{video.path}', "user_id": video.user_id, "rating": video.rating} for video in videos])
+    return jsonify([{"id": video.id, "name": video.name, "image": video.image, "path": f'http://35.233.224.157/videos/{video.path}', "user_id": video.user_id, "rating": video.rating} for video in videos])
 
 
 @app.route('/api/videos/top', methods=['GET'])
 def get_top_videos():
     videos = db.session.query(Video, User).join(User).order_by(Video.rating.desc()).all()
-    return jsonify([{"id": video.id, "name": video.name, "image": video.image, "path": f'http://localhost:5050/videos/{video.path}', "user_id": video.user_id, "rating": video.rating, "user": {"id": user.id, "name": user.name, "email": user.email}} for video, user in videos])
+    return jsonify([{"id": video.id, "name": video.name, "image": video.image, "path": f'http://35.233.224.157/videos/{video.path}', "user_id": video.user_id, "rating": video.rating, "user": {"id": user.id, "name": user.name, "email": user.email}} for video, user in videos])
 
 
 @app.route('/api/videos/<int:video_id>/vote', methods=['POST'])
@@ -587,9 +592,9 @@ class RabbitConsumer:
                 
                 logger.info("Procesando el video")
  
-                output_dir = "videos_converted"
+                output_dir = "shared/videos-converted"
 
-                file = 'shared/videos_converted/'+video.path
+                file = 'shared/videos-uploaded/'+video.path
                 filename = video.path
                 # Nombre del archivo de salida
                 output_filename = f"{output_dir}/procesado_{filename}"
@@ -683,12 +688,15 @@ class RabbitPublisher:
 
 
 if __name__ == '__main__':
-    # crea la cola que permite la comunicación entre el productor y el consumidor
+    # crea la cola
     create_queue_producer()
 
-    # Crear un hilo para el consumidor que escucha los mensajes de RabbitMQ y los procesa
-    consumer_thread = threading.Thread(target=run_consumer)
-    consumer_thread.start()
+    if constants.RUN_WORKER == "true":
+        # Crear un hilo para el consumidor
+        # consumer_thread = threading.Thread(target=run_consumer)
+        # consumer_thread.start()
+        run_consumer()
 
-    # Iniciar la aplicación Flask en el hilo principal
-    app.run(debug=True, host='0.0.0.0', port=5050)
+    if constants.RUN_SERVER == "true":
+        # Iniciar la aplicación Flask en el hilo principal
+        app.run(debug=True, host='0.0.0.0', port=5050)

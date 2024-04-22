@@ -1,6 +1,7 @@
 .idea
 .venv
 .env
+venv
 # IDE files
 .idea
 .DS_Store
