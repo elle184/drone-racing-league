@@ -374,7 +374,7 @@ def get_task(current_user, task_id):
     if video is None:
         return jsonify({"message": "video no encontrado"}), 404
 
-    url = f'http://35.233.224.157/videos/{video.path}'
+    url = f'http://34.83.144.84/videos/{video.path}'
 
     return jsonify({"id": task.id, "name": task.name, "video_id": task.video_id, "status": task.status, "url": url})
 
@@ -400,13 +400,13 @@ def send_video_uploaded(video_path):
 @app.route('/api/videos', methods=['GET'])
 def get_videos():
     videos = Video.query.all()
-    return jsonify([{"id": video.id, "name": video.name, "image": video.image, "path": f'http://35.233.224.157/videos/{video.path}', "user_id": video.user_id, "rating": video.rating} for video in videos])
+    return jsonify([{"id": video.id, "name": video.name, "image": video.image, "path": f'http://34.83.144.84/videos/{video.path}', "user_id": video.user_id, "rating": video.rating} for video in videos])
 
 
 @app.route('/api/videos/top', methods=['GET'])
 def get_top_videos():
     videos = db.session.query(Video, User).join(User).order_by(Video.rating.desc()).all()
-    return jsonify([{"id": video.id, "name": video.name, "image": video.image, "path": f'http://35.233.224.157/videos/{video.path}', "user_id": video.user_id, "rating": video.rating, "user": {"id": user.id, "name": user.name, "email": user.email}} for video, user in videos])
+    return jsonify([{"id": video.id, "name": video.name, "image": video.image, "path": f'http://34.83.144.84/videos/{video.path}', "user_id": video.user_id, "rating": video.rating, "user": {"id": user.id, "name": user.name, "email": user.email}} for video, user in videos])
 
 
 @app.route('/api/videos/<int:video_id>/vote', methods=['POST'])

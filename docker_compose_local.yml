@@ -1,0 +1,50 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'idrl-rabbit'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    env_file:
+      - .env
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - idrl-net
+
+  api:
+    container_name: 'idrl-api'
+    build:
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - rabbitmq
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    ports:
+      - "80:5050"
+    networks:
+      - idrl-net
+
+  postgresql:
+    image: postgres:latest
+    container_name: 'idrl-db'
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - idrl-net
+
+networks:
+  idrl-net:
+    driver: bridge
+
+volumes:
+  pgdata:
