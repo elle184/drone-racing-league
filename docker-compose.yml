@@ -1,7 +1,8 @@
+version: '3.8'  # specify the version of Docker Compose file format
 services:
   api:
     build:
-      context: ./api  # Change this to the directory where your Dockerfile is located
+      context: .  # Change this to the directory where your Dockerfile is located
       dockerfile: Dockerfile
     container_name: 'idrl-api'
     restart: always
