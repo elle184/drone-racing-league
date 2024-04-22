@@ -1,8 +1,7 @@
-
 services:
   api:
     build:
-      context: .
+      context: ./api  # Change this to the directory where your Dockerfile is located
       dockerfile: Dockerfile
     container_name: 'idrl-api'
     restart: always
