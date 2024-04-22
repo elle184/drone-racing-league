@@ -1,8 +1,10 @@
-version: '3.8'  # specify the version of Docker Compose file format
+version: '3'
 services:
+  rabbitmq:
+    # configuration for rabbitmq service
   api:
     build:
-      context: .  # Change this to the directory where your Dockerfile is located
+      context: .
       dockerfile: Dockerfile
     container_name: 'idrl-api'
     restart: always
@@ -12,3 +14,9 @@ services:
       - .:/app
     ports:
       - "80:5050"
+networks:
+  idrl-net:
+    # configuration for idrl-net network
+volumes:
+  pgdata:
+    # configuration for pgdata volume
