@@ -10,8 +10,8 @@ __pycache__/
 __pycache__/*.pyc
 
 # Video files
-videos-uploaded/
-videos-converted/
+compartidos/videos-uploaded/
+compartidos/videos-converted/
 video_otro_formato.mov
 *.avi
 *.mp4
