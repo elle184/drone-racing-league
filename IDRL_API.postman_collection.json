@@ -1,0 +1,819 @@
+{
+	"info": {
+		"_postman_id": "8e3cf81a-b7e6-48df-905f-b38b25237c72",
+		"name": "IDRL_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33185335",
+		"_collection_link": "https://grey-star-9028.postman.co/workspace/Solo-En-Binario~8d43fcec-56a1-409b-82f9-a808947a2d4e/collection/33185335-8e3cf81a-b7e6-48df-905f-b38b25237c72?action=share&source=collection_link&creator=33185335"
+	},
+	"item": [
+		{
+			"name": "create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"yojan\",\n  \"email\": \"yojan@gmail.com\",\n  \"user\": \"yojan\",\n  \"password\": \"yojan\",\n  \"confirm_password\": \"yojan\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/auth/signup",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create User Successfully",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"yojan\",\n  \"email\": \"yojan@gmail.com\",\n  \"user\": \"yojan\",\n  \"password\": \"yojan\",\n  \"confirm_password\": \"yojan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/signup",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.2 Python/3.9.6"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Apr 2024 02:44:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "134"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"cuenta creada exitosamente\",\n    \"user\": {\n        \"email\": \"yojan@gmail.com\",\n        \"id\": 1,\n        \"name\": \"yojan\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"if (responseCode.code === 200) {",
+							"    // Convertir la respuesta JSON en un objeto",
+							"    var jsonData = JSON.parse(responseBody);",
+							"",
+							"    // Capturar el token del objeto JSON",
+							"    var token = jsonData.token;",
+							"",
+							"    // Asignar el token a una variable de entorno en Postman",
+							"    pm.environment.set(\"token\", token);",
+							"} else {",
+							"    console.log(\"La solicitud no fue exitosa. Código de respuesta: \" + responseCode.code);",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"yojan\",\n  \"password\": \"yojan\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/auth/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login Successfully",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"yojan\",\n  \"password\": \"yojan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.2 Python/3.9.6"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Apr 2024 02:47:15 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "283"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"usuario autenticado\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJuYW1lIjoiYW5kZXJzb24iLCJlbWFpbCI6ImFuZGVyc29uQGdtYWlsLmNvbSIsImV4cCI6MTcxMjg5MTgzNSwiaWF0IjoxNzEyODkwMDM1LCJuYmYiOjE3MTI4OTAwMzV9.4BlGU_kuEUaAU8gzVl22LgzqomJC0jPv2-FnbzeV90I\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Edit Task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "video",
+							"type": "file",
+							"src": "/Users/yojan/Miso/desarrollo-nube/MISW-4203-Backend-Mobile/video3testtestestestestsetsetetset.mov"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Edit Task Successfully",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/Users/yojan/Miso/desarrollo-nube/MISW-4203-Backend-Mobile/video3testtestestestestsetsetetset.mov"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.2 Python/3.9.6"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Apr 2024 03:14:45 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "61"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"tarea de edición creada exitosamente\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Editing Tasks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Successfully Get Videos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.2 Python/3.9.6"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Apr 2024 03:05:22 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "140"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 4,\n        \"name\": \"20240411220408-1-video3testtestestestestsetsetetset.mov\",\n        \"status\": \"uploaded\",\n        \"video_id\": 4\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Top Rated Videos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/videos/top",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"videos",
+						"top"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Top Rated Videos Successfully",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/videos/top",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"videos",
+								"top"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.2 Python/3.9.6"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Apr 2024 03:27:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2045"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 6,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/20240411221445-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 5,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411221349-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 4,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411220408-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 3,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411220129-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 2,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411215345-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 1,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411215140-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get All Rated Videos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/videos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"videos"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get  Aall Top Rated Videos Successfully",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/videos/top",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"videos",
+								"top"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.2 Python/3.9.6"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Apr 2024 03:27:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2045"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 6,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/20240411221445-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 5,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411221349-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 4,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411220408-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 3,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411220129-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 2,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411215345-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    },\n    {\n        \"id\": 1,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411215140-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user\": {\n            \"email\": \"yojan@gmail.com\",\n            \"id\": 1,\n            \"name\": \"yojan\"\n        },\n        \"user_id\": 1\n    }\n]"
+				},
+				{
+					"name": "Get All Videos Successfully",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/videos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"videos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.2 Python/3.9.6"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Apr 2024 03:41:16 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1686"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411215140-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user_id\": 1\n    },\n    {\n        \"id\": 2,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411215345-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user_id\": 1\n    },\n    {\n        \"id\": 3,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411220129-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user_id\": 1\n    },\n    {\n        \"id\": 4,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411220408-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user_id\": 1\n    },\n    {\n        \"id\": 5,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/videos-uploaded/20240411221349-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user_id\": 1\n    },\n    {\n        \"id\": 6,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/20240411221445-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 0,\n        \"user_id\": 1\n    },\n    {\n        \"id\": 7,\n        \"image\": null,\n        \"name\": \"video3testtestestestestsetsetetset.mov\",\n        \"path\": \"http://localhost:5050/videos/20240411223448-1-video3testtestestestestsetsetetset.mov\",\n        \"rating\": 8,\n        \"user_id\": 1\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Vote Video",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDYxNDU1MiwianRpIjoiZTAzODc3MTItMWE3Mi00ZWY5LTllOTItYWZlYzdlMjNmN2Y3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MywibmJmIjoxNzEwNjE0NTUyLCJjc3JmIjoiMjZlYTIyMGUtNGFhMi00OGViLWJmZmYtYWQ4OTIzYTVjZGJiIiwiZXhwIjoxNzEwNjE2MzUyLCJyb2xlIjoiYWRtaW4iLCJuYW1lIjoiZGVwb3J0aXN0YSIsImVtYWlsIjoiZGVwb3J0aXN0YUBnbWFpbC5jb20iLCJ1c2VyIjoiZGVwb3J0aXN0YSJ9.zU3z3e158WqeqJFrB5w6OVRMRycWZgJO-Ma_AiDUDYY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/videos/:id/vote",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"videos",
+						":id",
+						"vote"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Vote Video Successfully",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/videos/:id/vote",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"videos",
+								":id",
+								"vote"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.2 Python/3.9.6"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Apr 2024 03:38:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "48"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"voto registrado exitosamente\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtain Information about a Task",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/tasks/7",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"tasks",
+						"7"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtain Information from a Success Task",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tasks/7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"7"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.2 Python/3.9.6"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Apr 2024 03:35:02 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "221"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 7,\n    \"name\": \"20240411223448-1-video3testtestestestestsetsetetset.mov\",\n    \"status\": \"uploaded\",\n    \"url\": \"http://localhost:5050/videos/20240411223448-1-video3testtestestestestsetsetetset.mov\",\n    \"video_id\": 7\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Task",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/tasks/6",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"tasks",
+						"6"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete Task Successfully",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/tasks/6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"6"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.2 Python/3.9.6"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Apr 2024 03:23:23 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "48"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"tarea eliminada exitosamente\"\n}"
+				}
+			]
+		}
+	]
+}
