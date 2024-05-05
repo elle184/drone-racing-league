@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 db = SQLAlchemy()
 
@@ -11,3 +12,11 @@ class User(db.Model) :
 
     def __repr__(self):
         return "{}-{}-{}-{}".format(self.id, self.name, self.user, self.email)
+
+class UsuarioSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        load_instance = True
+        # sqla_session = db.session
+
+usuario_schema = UsuarioSchema()
