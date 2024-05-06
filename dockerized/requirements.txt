@@ -13,3 +13,5 @@ Werkzeug
 jinja2
 PyJWT
 flask
+wheel
+gunicorn
