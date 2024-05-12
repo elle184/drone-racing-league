@@ -1,7 +1,7 @@
 from rest import create_app
 from flask_restful import Api
 from .modelos import db, User
-from .vistas import VistaEjemplo, VistaCrearUsuario
+from .vistas import VistaEjemplo, VistaCrearUsuario, VistaLogin
 
 app = create_app('default')
 app_context = app.app_context()
@@ -18,3 +18,4 @@ db.init_app(app)
 api = Api(app)
 api.add_resource(VistaEjemplo, '/welcome')
 api.add_resource(VistaCrearUsuario,'/api/auth/signup')
+api.add_resource(VistaLogin, '/api/auth/login')
