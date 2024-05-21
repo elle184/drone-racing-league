@@ -20,3 +20,20 @@ class UsuarioSchema(SQLAlchemyAutoSchema):
         # sqla_session = db.session
 
 usuario_schema = UsuarioSchema()
+
+class Video(db.Model) :
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(500))
+    path = db.Column(db.String(500))
+    image = db.Column(db.String(500))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    rating = db.Column(db.Integer)
+    created_at = db.Column(db.DateTime)
+
+class Task(db.Model) :
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(500))
+    video_id = db.Column(db.Integer, db.ForeignKey("video.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    status = db.Column(db.String(500))
+    created_at = db.Column(db.DateTime)
