@@ -1,8 +1,10 @@
-from ..modelos import db, User, Task, usuario_schema
+import datetime
+from ..modelos import db, User, Task, Video, usuario_schema
 from flask_restful import Resource
-from flask import request, abort
+from flask import request, abort, jsonify
 from flask_jwt_extended import create_access_token
 
+from ..service.user_service import UserService
 from ..util import token_util
 
 
@@ -41,7 +43,50 @@ class LoginView(Resource):
 
 class TaskView(Resource) :
     def get(self) :
+        tasks = []
+        user_service = UserService()
         decode_token = token_util.decode(request.headers['Authorization'].split(" ")[1])
-        print(decode_token['sub'])
+        user = user_service.getById(decode_token['sub'])
 
-        return Task.query.all()
+        if user is not None :
+            tasks = Task.query.all()
+
+        return jsonify([{"id": task.id, "name": task.name, "video_id": task.video_id, "status": task.status} for task in tasks])
+
+    def post(self):
+        if request.json['filename'] is not None :
+            user_service = UserService()
+            decode_token = token_util.decode(request.headers['Authorization'].split(" ")[1])
+            user = user_service.getById(decode_token['sub'])
+
+            video = Video(
+                name = request.json['filename']
+                , path = '/home/lucka/Videos/drl-videos'
+                , user_id = user.id)
+
+            db.session.add(video)
+            db.session.commit()
+
+            task = Task(
+                video_id = video.id
+                , user_id = user.id
+                , status = 'uploaded')
+
+            db.session.add(task)
+            db.session.commit()
+
+class TaskViewDetail(Resource) :
+    def get(self, task_id):
+        task = None
+        user_service = UserService()
+        decode_token = token_util.decode(request.headers['Authorization'].split(" ")[1])
+        user = user_service.getById(decode_token['sub'])
+
+        if user is not None :
+            task = Task.query.filter(Task.id == task_id).first()
+
+        return jsonify({
+            "id": task.id
+            , "name": task.name
+            , "status": task.status
+            , "url" : f'http://localhost:5050/videos/{task.video_id}'})
