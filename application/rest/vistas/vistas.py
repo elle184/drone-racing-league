@@ -7,7 +7,6 @@ from flask_jwt_extended import create_access_token
 from ..service.user_service import UserService
 from ..util import token_util
 
-
 class VistaEjemplo(Resource) :
 
     def get(self):
